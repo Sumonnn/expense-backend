@@ -3,8 +3,8 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require("cookie-parser");
 
-const userRoutes = require('./routes/user.routes');
-
+const userRoutes = require('./routes/user.routes.js');
+const transactionRoutes = require('./routes/transaction.routes.js');
 
 //dotenv
 require('dotenv').config();
@@ -21,6 +21,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/transaction", transactionRoutes);
 
 //listening
 app.listen(port, (req, res) => {
