@@ -154,21 +154,22 @@ module.exports.deleteTransaction = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 success: false,
-                errors: errors.array()
+                errors: errors.array(),
             });
         }
 
+        // Find the transaction by ID
         const transaction = await Transaction.findById(req.params.id);
-        if (!transaction || transaction.userId.toString() !== req.user._id) {
-            return res.status(404).json({ error: "Transaction not found" });
+        if (!transaction || transaction.userId.toString() !== req.user._id.toString()) {
+            return res.status(404).json({ success: false, error: "Transaction not found or unauthorized" });
         }
-        await transaction.findByIdAndDelete(req.params.id);
-        await transaction.save();
+
+        // Correct deletion method
+        await Transaction.findByIdAndDelete(req.params.id);
 
         return res.status(200).json({
             success: true,
             message: "Transaction deleted successfully",
-            // transaction
         });
     } catch (error) {
         return res.status(500).json({

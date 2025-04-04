@@ -13,17 +13,17 @@ router.post('/addTransaction',
     transactionController.addTransaction
 );
 // Get all transactions
-router.get('/getTransactions',
+router.post('/getTransactions',
     auth,
     transactionController.getTransactions
 );
 // Get a transaction by ID
-router.get('/getTransaction/:id',
+router.post('/getTransaction/:id',
     auth,
     transactionController.getTransactionById
 );
 //delete a transaction by ID
-router.delete('/deleteTransaction/:id',
+router.post('/deleteTransaction/:id',
     auth,
     transactionController.deleteTransaction
 );
@@ -36,7 +36,7 @@ router.put('/updateTransaction/:id',
     transactionController.updateTransaction
 );
 // Get summary of transactions
-router.get('/getsummary',
+router.post('/getsummary',
     auth,
     transactionController.getSummary
 );
